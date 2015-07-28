@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -42,7 +43,7 @@ public class ViewAdapter extends ArrayAdapter<PbView> {
             viewHolder.image= (SimpleDraweeView) view.findViewById(R.id.my_image_view);
             viewHolder.time= (TextView) view.findViewById(R.id.tv_item_time);
             viewHolder.name= (TextView) view.findViewById(R.id.tv_item_name);
-            viewHolder.ok= (TextView) view.findViewById(R.id.tv_item_ok);
+            viewHolder.star= (RatingBar) view.findViewById(R.id.item_ratingBar);
             viewHolder.address= (TextView) view.findViewById(R.id.tv_item_address);
             view.setTag(viewHolder);
         }else{
@@ -54,14 +55,14 @@ public class ViewAdapter extends ArrayAdapter<PbView> {
         Uri uri = Uri.parse(IP.ip+pbView.getVUrl());
         viewHolder.image.setImageURI(uri);
         viewHolder.address.setText(pbView.getVArea());
-        viewHolder.ok.setText(pbView.getVOk());
+        viewHolder.star.setRating(Float.valueOf(pbView.getVOk()));
         return view;
     }
     class ViewHolder{
         SimpleDraweeView image;
         TextView name;
         TextView time;
-        TextView ok;
+        RatingBar star;
         TextView address;
     }
 

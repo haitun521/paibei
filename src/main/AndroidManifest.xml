@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.haitun.pb" >
+    package="com.haitun.pb"
+    android:versionName="1.2.0">
 
     <!-- 这个权限用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -114,6 +115,14 @@
         <activity
             android:name=".ui.JiFenListActivity"
             android:label="@string/title_activity_ji_fen_list" >
+        </activity>
+        <activity
+            android:name=".ui.ClassActivity_"
+            android:label="ClassActivity" >
+        </activity>
+        <activity
+            android:name=".ui.AssessActivity_"
+            android:label="@string/title_activity_assess" >
         </activity>
     </application>
 

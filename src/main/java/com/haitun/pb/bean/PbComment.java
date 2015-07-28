@@ -8,7 +8,7 @@ package com.haitun.pb.bean;
 public class PbComment implements java.io.Serializable {
 
 	/**
-	 * 
+	 * GsonFormat
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer CId;

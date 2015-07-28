@@ -10,9 +10,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.haitun.pb.R;
-import com.haitun.pb.fragment.DongtaiFragment;
 import com.haitun.pb.fragment.MeFragment;
 import com.haitun.pb.fragment.MessageFragment;
+import com.haitun.pb.fragment.NavigationFragment;
+import com.haitun.pb.fragment.NavigationFragment_;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +26,8 @@ public class MainActivity extends Activity {
     private TextView title;
     private String[] mstring={"首页","消息","我"};
     private View[] mtabs;
-    private List<Fragment> list = new ArrayList<Fragment>();
-    private DongtaiFragment dongtaiFragment;
+    private List<Fragment> list = new ArrayList<>();
+    private NavigationFragment dongtaiFragment;
     private MessageFragment messageFragment;
     private MeFragment meFragment;
     private int index;
@@ -54,7 +56,7 @@ public class MainActivity extends Activity {
     }
     private void initView() {
 
-        dongtaiFragment = new DongtaiFragment();
+        dongtaiFragment = new NavigationFragment_();
         messageFragment = new MessageFragment();
         meFragment = new MeFragment();
         list.add(dongtaiFragment);
@@ -78,8 +80,7 @@ public class MainActivity extends Activity {
 
     /**
      * 点击
-     *
-     * @param v
+     * @param v view
      */
     public void onClick(View v) {
         switch (v.getId()) {

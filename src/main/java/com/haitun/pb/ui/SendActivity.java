@@ -19,11 +19,13 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +46,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
-public class SendActivity extends Activity implements OnClickListener{
+public class SendActivity extends Activity implements OnClickListener, AdapterView.OnItemSelectedListener {
 
     public ImageView title_left;
     public TextView title_center;
@@ -53,14 +55,18 @@ public class SendActivity extends Activity implements OnClickListener{
     private TextView location_tv;
     private ImageView view_images;
     private EditText e_infos;
-    private Bitmap mBitmap ;
+    private Bitmap mBitmap;
+    private Spinner mSpinner;
     private Uri imageUri;
-    private String photo=null;
-    private MyProgressDialog progressDialog=null;
+    private String photo = null;
+    private MyProgressDialog progressDialog = null;
 
     private String userId;
     private String address;
-    SharedPreferences sp =null;
+    private String classStr;
+    private String latitude;
+    private String longitude;
+    SharedPreferences sp = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,17 +77,25 @@ public class SendActivity extends Activity implements OnClickListener{
         Init();
 
     }
-    public void Init(){
-        sp=getSharedPreferences("config", Context.MODE_PRIVATE);
-        userId=String.valueOf(sp.getInt("userid",0));
-        address=sp.getString("address","河南省焦作市山阳区");
+
+    public void Init() {
+        sp = getSharedPreferences("config", Context.MODE_PRIVATE);
+        userId = String.valueOf(sp.getInt("userid", 0));
+        address = sp.getString("address", "河南省焦作市山阳区");
+        latitude = sp.getString("latitude", "0");
+        longitude = sp.getString("longitude", "0");
+        classStr = "酒店";
 
         view_images = (ImageView) findViewById(R.id.send_images);
         e_infos = (EditText) findViewById(R.id.e_infos);
-        location_tv= (TextView) findViewById(R.id.site_tv);
+        location_tv = (TextView) findViewById(R.id.site_tv);
+        mSpinner = (Spinner) findViewById(R.id.select_spinner);
+
         view_images.setOnClickListener(this);
+        mSpinner.setOnItemSelectedListener(this);
         location_tv.setText(address);
     }
+
     //设置标题栏
     private void initTitle() {
         title_left = (ImageView) findViewById(R.id.title_left);
@@ -100,18 +114,18 @@ public class SendActivity extends Activity implements OnClickListener{
         switch (v.getId()) {
             case R.id.title_right:
                 String infos = e_infos.getText().toString();
-                if(photo==null){
-                    Toast.makeText(this, "不发送?",Toast.LENGTH_LONG ).show();
-                }else{
-                 progressDialog=MyProgressDialog.show(this,"发送中...",false,null);
-                    reg(getApplicationContext(),photo,infos,userId,address);
+                if (photo == null) {
+                    Toast.makeText(this, "不发送?", Toast.LENGTH_LONG).show();
+                } else {
+                    progressDialog = MyProgressDialog.show(this, "发送中...", false, null);
+                    reg(getApplicationContext(), photo, infos, userId, address);
 
                 }
                 break;
             case R.id.send_images:
                 String info = e_infos.getText().toString();
-                if(TextUtils.isEmpty(info)){
-                    return ;
+                if (TextUtils.isEmpty(info)) {
+                    return;
                 }
                 KeyboardUtils.closeKeyBoard(SendActivity.this);
                 new PopupWindows(this, v);
@@ -123,6 +137,7 @@ public class SendActivity extends Activity implements OnClickListener{
                 break;
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
@@ -137,7 +152,7 @@ public class SendActivity extends Activity implements OnClickListener{
                 }
                 break;
             case 2:
-                if(data != null){
+                if (data != null) {
                     try {
                         compressImageFromFile(data.getData());
                     } catch (FileNotFoundException e) {
@@ -179,7 +194,7 @@ public class SendActivity extends Activity implements OnClickListener{
         newOpts.inInputShareable = true;//。当系统内存不够时候图片自动被回收
 
         mBitmap = BitmapFactory.decodeStream(getContentResolver().
-                openInputStream(srcPath), null,  newOpts);
+                openInputStream(srcPath), null, newOpts);
         view_images.setImageBitmap(mBitmap);
 
         //将图片用Base64进行打包上传到服务器。
@@ -196,6 +211,7 @@ public class SendActivity extends Activity implements OnClickListener{
         //将图片的字节流数据加密成base64字符输出
         photo = Base64.encodeBytes(buffer);
     }
+
     //用Base64字节流形式通过AsyncHttpClient框架传输网络传输图片信息
     public void reg(final Context context, String photo, String infos, String userId, String address) {
         try {
@@ -203,22 +219,27 @@ public class SendActivity extends Activity implements OnClickListener{
             params.put("photo", photo);
             params.put("infos", infos);
             params.put("userId", userId);
+            params.put("class", classStr);
             params.put("address", address);
-            String url = IP.ip+"/ImageSer";
+            params.put("latitude", latitude);
+            params.put("longitude", longitude);
+
+            String url = IP.ip + "/ImageSer";
             AsyncHttpClient client = new AsyncHttpClient();
-            client.post(url,params,new AsyncHttpResponseHandler() {
+            client.post(url, params, new AsyncHttpResponseHandler() {
 
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     progressDialog.dismiss();
                     String info = new String(responseBody);
-                    if(info.equals("true")){
+                    if (info.equals("true")) {
                         SendActivity.this.finish();
 
-                    }else{
+                    } else {
                         Toast.makeText(context, "上传失败", Toast.LENGTH_LONG).show();
                     }
                 }
+
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                     progressDialog.dismiss();
@@ -227,6 +248,17 @@ public class SendActivity extends Activity implements OnClickListener{
             });
         } catch (Exception e) {
         }
+    }
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        classStr = parent.getItemAtPosition(position).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     //弹出Pop窗口
@@ -260,9 +292,9 @@ public class SendActivity extends Activity implements OnClickListener{
             bt1.setOnClickListener(new OnClickListener() {     //调用摄像头照相
                 public void onClick(View v) {
                     //创建一个File对象，用于存储拍照后的图片
-                    File outputImage = new File(Environment.getExternalStorageDirectory(),"/output_image.jpg");
+                    File outputImage = new File(Environment.getExternalStorageDirectory(), "/output_image.jpg");
                     try {
-                        if(outputImage.exists()){
+                        if (outputImage.exists()) {
                             outputImage.delete();
                         }
                         outputImage.createNewFile();
@@ -280,9 +312,9 @@ public class SendActivity extends Activity implements OnClickListener{
             bt2.setOnClickListener(new OnClickListener() {    //调用系统图库
                 public void onClick(View v) {
                     // 下面这句指定调用相机拍照后的照片存储的路径
-                    File outputImage = new File(Environment.getExternalStorageDirectory(),"output_image.jpg");
+                    File outputImage = new File(Environment.getExternalStorageDirectory(), "output_image.jpg");
                     try {
-                        if(outputImage.exists()){
+                        if (outputImage.exists()) {
                             outputImage.delete();
                         }
                         outputImage.createNewFile();
