@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -43,35 +44,34 @@
             android:id="@+id/view_item_image"
             android:layout_width="match_parent"
             android:layout_height="200dp" />
+
         <TextView
             android:id="@+id/view_item_describe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="false"
             android:layout_marginTop="2dp"
+            android:singleLine="false"
             android:text="描述"
             android:textColor="@color/grass_primary"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
-      <!--  <TextView
-            android:id="@+id/view_item_describe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="false"
-            android:text="描述"
-            android:padding="5dp"
-            android:textColor="@color/grass_primary"
-            android:textSize="18sp"
-            android:background="@android:color/white"
-            />-->
+        <!--  <TextView
+              android:id="@+id/view_item_describe"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:singleLine="false"
+              android:text="描述"
+              android:padding="5dp"
+              android:textColor="@color/grass_primary"
+              android:textSize="18sp"
+              android:background="@android:color/white"
+              />-->
     </LinearLayout>
 
     <RelativeLayout
@@ -117,6 +117,7 @@
             android:src="@mipmap/jiantou_down" />
 
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/view_item_click_assess"
         android:layout_width="match_parent"
@@ -126,14 +127,14 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
-
-        <RatingBar
-            android:id="@+id/view_item_ratingBar"
+        <TextView
+            android:id="@+id/text_reputation"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            style="?android:attr/ratingBarStyleIndicator"
-            android:numStars="5"
-            android:stepSize="0.5"/>
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:text="@string/text_reputation"
+            android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/view_item_arrow"
@@ -142,14 +143,63 @@
             android:layout_alignParentRight="true"
             android:gravity="center_vertical|right"
             android:src="@mipmap/jiantou_down" />
+
         <TextView
             android:id="@+id/view_item_assess"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/view_item_arrow"
             android:gravity="center_vertical"
             android:text="0人评论"
-            android:layout_toLeftOf="@id/view_item_arrow"
             android:textSize="16dp" />
     </RelativeLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:padding="10dp"
+        android:text="评价"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            >
+        <RatingBar
+            android:id="@+id/view_item_ratingBar"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:stepSize="0.5" />
+            <TextView
+                android:id="@+id/text_star_num"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:visibility="gone"
+                android:layout_marginRight="5dp"
+                android:text="@string/text_star_num"/>
+        </RelativeLayout>
+        <com.cengalabs.flatui.views.FlatButton
+            android:id="@+id/button_assess"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/button_assess"
+            android:textSize="20sp"
+            flatui:fl_theme="@array/grass" />
+    </LinearLayout>
 </LinearLayout>

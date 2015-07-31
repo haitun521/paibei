@@ -93,8 +93,8 @@
     <orderEntry type="library" exported="" name="SMSSDK-1.1.6" level="project" />
     <orderEntry type="library" exported="" name="SocialSDK_Sina" level="project" />
     <orderEntry type="library" exported="" name="umeng_social_sdk" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-22.0.0" level="project" />
     <orderEntry type="library" exported="" name="spring-android-rest-template-2.0.0.BUILD-SNAPSHOT" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-22.0.0" level="project" />
     <orderEntry type="library" exported="" name="fresco-0.5.0" level="project" />
     <orderEntry type="library" exported="" name="imagepipeline-0.5.0" level="project" />
     <orderEntry type="library" exported="" name="SocialSDK_QQZone_1" level="project" />

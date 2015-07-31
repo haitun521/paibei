@@ -18,6 +18,7 @@
     <string name="title_activity_dongtai">DongtaiActivity</string>
     <string name="title_activity_me">MeActivity</string>
     <string name="about_intro">你好,中国</string>
+    <string name="error">网络出错</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -29,6 +30,9 @@
     <string name="forget_password_hint">忘记密码？</string>
     <string name="title_activity_assess">AssessActivity</string>
     <string name="clazz">分类</string>
+    <string name="button_assess">确认评价</string>
+    <string name="text_star_num">您的评价是:</string>
+    <string name="text_reputation">好评率:</string>
 
     <!-- 下拉列表内容 -->
    <string-array name="spingarr">

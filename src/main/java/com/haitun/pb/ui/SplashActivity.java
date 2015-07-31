@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Window;
 
 import com.baidu.location.BDLocation;
@@ -81,19 +80,19 @@ public class SplashActivity extends Activity {
             String province=location.getProvince();
             String city=location.getCity();
             String distric=location.getDistrict();//获取区县信息
-            double latitude=location.getLatitude();//获取纬度坐标
+           /* double latitude=location.getLatitude();//获取纬度坐标
             double longitude=location.getLongitude();//获取纬度坐标
 
             Log.i("+++++",Double.toString(latitude));
-            Log.i("+++++",Double.toString(longitude));
+            Log.i("+++++",Double.toString(longitude));*/
             SharedPreferences.Editor editor;
             editor = sp.edit();
             editor.putString("address",address);
             editor.putString("province",province);
             editor.putString("city",city);
             editor.putString("distric",distric);
-            editor.putString("latitude",Double.toString(latitude));
-            editor.putString("longitude",Double.toString(longitude));
+           /* editor.putString("latitude",Double.toString(latitude));
+            editor.putString("longitude",Double.toString(longitude))*/;
             editor.apply();
         }
 

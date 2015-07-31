@@ -64,8 +64,8 @@ public class SendActivity extends Activity implements OnClickListener, AdapterVi
     private String userId;
     private String address;
     private String classStr;
-    private String latitude;
-    private String longitude;
+    /*    private String latitude;
+        private String longitude;*/
     SharedPreferences sp = null;
 
     @Override
@@ -81,9 +81,9 @@ public class SendActivity extends Activity implements OnClickListener, AdapterVi
     public void Init() {
         sp = getSharedPreferences("config", Context.MODE_PRIVATE);
         userId = String.valueOf(sp.getInt("userid", 0));
-        address = sp.getString("address", "河南省焦作市山阳区");
-        latitude = sp.getString("latitude", "0");
-        longitude = sp.getString("longitude", "0");
+        address = sp.getString("address", "河南省焦作市山阳区春秋大道");
+        /*latitude = sp.getString("latitude", "0");
+        longitude = sp.getString("longitude", "0");*/
         classStr = "酒店";
 
         view_images = (ImageView) findViewById(R.id.send_images);
@@ -221,8 +221,8 @@ public class SendActivity extends Activity implements OnClickListener, AdapterVi
             params.put("userId", userId);
             params.put("class", classStr);
             params.put("address", address);
-            params.put("latitude", latitude);
-            params.put("longitude", longitude);
+           /* params.put("latitude", latitude);
+            params.put("longitude", longitude);*/
 
             String url = IP.ip + "/ImageSer";
             AsyncHttpClient client = new AsyncHttpClient();
