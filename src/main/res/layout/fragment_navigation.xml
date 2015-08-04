@@ -17,9 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/nav_btn_hotel"
-            android:background="@color/sky_primary"
+            android:background="@mipmap/hotel_bg"
             android:text="酒店"
-            android:textColor="@android:color/white"
+            android:textColor="@color/white"
             android:textSize="30sp" />
     </LinearLayout>
 
@@ -33,9 +33,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/nav_btn_hospital"
-            android:background="@color/grass_primary"
+            android:background="@mipmap/hospital_bg"
             android:text="医院"
-            android:textColor="@android:color/white"
+            android:textColor="@color/red"
             android:textSize="30sp" />
     </LinearLayout>
 
@@ -49,9 +49,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/nav_btn_trip"
-            android:background="@color/orange_primary"
+            android:background="@mipmap/travel_bg"
             android:text="周边*旅游"
-            android:textColor="@android:color/white"
+            android:textColor="@color/green"
             android:textSize="30sp" />
     </LinearLayout>
 

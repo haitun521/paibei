@@ -136,7 +136,8 @@ public class ClassActivity extends Activity implements SwipeRefreshLayout.OnRefr
         RequestParams params = new RequestParams();
         params.put("start", start);
         params.put("num", num);
-        params.put("address", address);
+        params.put("address", "%"+address+"%");
+        params.put("clazz", classStr[classIndex]);
         client.setConnectTimeout(5000);
         client.post(URL, params, new AsyncHttpResponseHandler() {
             @Override
@@ -180,6 +181,7 @@ public class ClassActivity extends Activity implements SwipeRefreshLayout.OnRefr
                 p.setVUrl(js.getString("imageUrl"));
                 p.setVArea(js.getString("address"));
                 p.setVOk(js.getString("ok"));//点赞的个数
+                p.setPeople(js.getString("people"));
                 mDatas.add(p);
             }
         } catch (Exception e) {

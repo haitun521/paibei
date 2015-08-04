@@ -34,6 +34,7 @@ import com.umeng.socialize.sso.QZoneSsoHandler;
 import org.apache.http.Header;
 
 import java.net.URISyntaxException;
+import java.text.DecimalFormat;
 
 public class ViewItemActivity extends Activity implements View.OnClickListener, RatingBar.OnRatingBarChangeListener {
 
@@ -121,7 +122,11 @@ public class ViewItemActivity extends Activity implements View.OnClickListener, 
         }
 
         address_tv.setText(pbView.getVArea());
+        float rep=Float.parseFloat(pbView.getVOk())/5;
+        DecimalFormat format=new DecimalFormat(".00%");
+        reputation_tv.append(format.format(rep));
 
+        viewitemassess.setText(pbView.getPeople()+"人评论");
 
     }
 
@@ -234,7 +239,7 @@ public class ViewItemActivity extends Activity implements View.OnClickListener, 
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("id", id);
-        params.put("userId", userId);
+        //params.put("userId", userId);
         params.put("numStars", String.valueOf(num));
         client.setConnectTimeout(5000);
         client.post(pathHeart, params, new AsyncHttpResponseHandler() {

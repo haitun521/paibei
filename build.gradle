@@ -4,7 +4,7 @@ buildscript {
     }
     dependencies {
         // replace with the current version of the Android plugin
-        classpath 'com.android.tools.build:gradle:1.1.0'
+        classpath 'com.android.tools.build:gradle:1.2.3'
         // replace with the current version of the android-apt plugin
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
     }
@@ -45,7 +45,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 1
-        versionName "1.2.0"
+        versionName "1.2.2"
     }
     buildTypes {
         release {
@@ -83,11 +83,10 @@ dependencies {
     compile files('libs/SocialSDK_yixin_1.jar')
     compile files('libs/SocialSDK_yixin_2.jar')
     compile files('libs/umeng_social_sdk.jar')
-
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
-
-    compile "org.springframework.android:spring-android-rest-template:2.0.0.BUILD-SNAPSHOT"
+    compile 'org.springframework.android:spring-android-rest-template:2.0.0.BUILD-SNAPSHOT'
+    compile files('libs/core.jar')
 }
 apt {
     arguments {

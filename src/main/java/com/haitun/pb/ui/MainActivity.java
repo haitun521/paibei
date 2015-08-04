@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,11 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements View.OnClickListener {
 
-    private final static String ACTION="com.haitun.pb.ui.finishRegActivity";
+    private final static String ACTION = "com.haitun.pb.ui.finishRegActivity";
     private TextView title;
-    private String[] mstring={"首页","消息","我"};
+    private ImageView title_left;
+    private String[] mstring = {"首页", "消息", "我"};
     private View[] mtabs;
     private List<Fragment> list = new ArrayList<>();
     private NavigationFragment dongtaiFragment;
@@ -40,7 +42,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         //发送广播
-        Intent intent=new Intent(ACTION);
+        Intent intent = new Intent(ACTION);
         sendBroadcast(intent);
 
         intiTitle();
@@ -51,9 +53,14 @@ public class MainActivity extends Activity {
     //标题栏
     private void intiTitle() {
         title = (TextView) findViewById(R.id.title_center);
+        title_left = (ImageView) findViewById(R.id.title_left);
+        title_left.setImageResource(R.drawable.ic_aspect_ratio_white_24dp);
         title.setText("首页");
+        title_left.setVisibility(View.VISIBLE);
+        title_left.setOnClickListener(this);
 
     }
+
     private void initView() {
 
         dongtaiFragment = new NavigationFragment_();
@@ -75,11 +82,11 @@ public class MainActivity extends Activity {
         mtabs[1] = findViewById(R.id.message);
         mtabs[2] = findViewById(R.id.me);
         mtabs[0].setSelected(true);
-
     }
 
     /**
      * 点击
+     *
      * @param v view
      */
     public void onClick(View v) {
@@ -91,7 +98,7 @@ public class MainActivity extends Activity {
                 Toast.makeText(this, "敬请期待", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_ck:
-                Intent intent=new Intent(this,SendActivity.class);
+                Intent intent = new Intent(this, SendActivity.class);
                 startActivity(intent);
                 break;
             case R.id.message:
@@ -101,13 +108,16 @@ public class MainActivity extends Activity {
             case R.id.me:
                 index = 2;
                 break;
+            case R.id.title_left:
+                actionSweep();
+                break;
             default:
                 break;
 
         }
-        if(index!=currentIndex){
-            getFragmentManager().beginTransaction().replace(R.id.id_fragment,list.get(index))
-            .commit();
+        if (index != currentIndex) {
+            getFragmentManager().beginTransaction().replace(R.id.id_fragment, list.get(index))
+                    .commit();
         }
         title.setText(mstring[index]);
         mtabs[currentIndex].setSelected(false);
@@ -115,7 +125,23 @@ public class MainActivity extends Activity {
         currentIndex = index;
     }
 
-     private static long firstTime;
+    public void actionSweep() {
+        Intent intent = new Intent(this, CaptureActivity.class);
+        startActivityForResult(intent, 100);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if ((requestCode == 100 || resultCode == Activity.RESULT_OK )&& data != null) {
+            String res= data.getStringExtra("result");
+            Toast.makeText(this, res, Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private static long firstTime;
 
     /**
      * 连续按两次返回键就退出
@@ -125,9 +151,9 @@ public class MainActivity extends Activity {
 
         if (firstTime + 2000 > System.currentTimeMillis()) {
             super.onBackPressed();
-           // System.exit(0);
+            // System.exit(0);
         } else {
-            Toast.makeText(this,"再按一次退出程序",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
         }
         firstTime = System.currentTimeMillis();
     }

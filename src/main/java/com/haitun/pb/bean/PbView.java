@@ -7,18 +7,19 @@ package com.haitun.pb.bean;
  */
 public class PbView implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	private String VWord;
-	private String VUrl;
-	private String VScdate;
-	private String VOk;
-	private String VUnok;
-	private String VArea;
+    private String VWord;
+    private String VUrl;
+    private String VScdate;
+    private String VOk;
+    private String VUnok;
+    private String VArea;
     private String VId;
+    private String people;//评论的人数
 
     public String getName() {
         return name;
@@ -30,8 +31,8 @@ public class PbView implements java.io.Serializable {
 
     private String name;
 
-	public PbView() {
-	}
+    public PbView() {
+    }
 
     public PbView(String VWord, String VId, String VArea, String VUnok, String VScdate, String VOk, String VUrl) {
         this.VWord = VWord;
@@ -98,5 +99,12 @@ public class PbView implements java.io.Serializable {
 
     public void setVId(String VId) {
         this.VId = VId;
+    }
+
+    public String getPeople() {
+        return people;
+    }
+    public void setPeople(String people) {
+        this.people = people;
     }
 }

@@ -81,7 +81,7 @@ public class SendActivity extends Activity implements OnClickListener, AdapterVi
     public void Init() {
         sp = getSharedPreferences("config", Context.MODE_PRIVATE);
         userId = String.valueOf(sp.getInt("userid", 0));
-        address = sp.getString("address", "河南省焦作市山阳区春秋大道");
+        address = sp.getString("address", "河南省焦作市山阳区");
         /*latitude = sp.getString("latitude", "0");
         longitude = sp.getString("longitude", "0");*/
         classStr = "酒店";

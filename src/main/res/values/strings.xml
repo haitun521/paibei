@@ -40,5 +40,7 @@
     <item>医院</item>
     <item>周边*旅游</item>
     </string-array>
+    <string name="title_activity_capture">CaptureActivity</string>
+    <string name="capture_tip">请将二维码置于取景框内扫描</string>
 
 </resources>

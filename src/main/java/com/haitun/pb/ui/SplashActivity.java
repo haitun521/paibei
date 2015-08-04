@@ -56,12 +56,12 @@ public class SplashActivity extends Activity {
             /**
              * 是否已经登录过
              */
-            /*if (id == 0) {
+            if (id == 0) {
                 intent.setClass(SplashActivity.this, LoginActivity.class);
             } else {
                 intent.setClass(SplashActivity.this, MainActivity.class);
-            }*/
-            intent.setClass(SplashActivity.this, MainActivity.class);
+            }
+            //intent.setClass(SplashActivity.this, MainActivity.class);
 
             startActivity(intent);
             SplashActivity.this.finish();
