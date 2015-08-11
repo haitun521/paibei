@@ -16,7 +16,6 @@ import com.haitun.pb.fragment.MessageFragment;
 import com.haitun.pb.fragment.NavigationFragment;
 import com.haitun.pb.fragment.NavigationFragment_;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +23,7 @@ import java.util.List;
 public class MainActivity extends Activity implements View.OnClickListener {
 
     private final static String ACTION = "com.haitun.pb.ui.finishRegActivity";
+    public  static final String SCAN_CONSTANT ="SCAN_CONSTANT";
     private TextView title;
     private ImageView title_left;
     private String[] mstring = {"首页", "消息", "我"};
@@ -128,6 +128,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void actionSweep() {
         Intent intent = new Intent(this, CaptureActivity.class);
         startActivityForResult(intent, 100);
+       /* Intent intent=new Intent(this, WebActivity.class);
+        startActivity(intent);*/
+
     }
 
     @Override
@@ -136,7 +139,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         if ((requestCode == 100 || resultCode == Activity.RESULT_OK )&& data != null) {
             String res= data.getStringExtra("result");
-            Toast.makeText(this, res, Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(this, WebActivity.class);
+            intent.putExtra(SCAN_CONSTANT,res);
+            startActivity(intent);
+        }else{
+            Toast.makeText(this, "非法的网址", Toast.LENGTH_SHORT).show();
         }
 
     }

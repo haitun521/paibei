@@ -123,7 +123,7 @@ public class ViewItemActivity extends Activity implements View.OnClickListener, 
 
         address_tv.setText(pbView.getVArea());
         float rep=Float.parseFloat(pbView.getVOk())/5;
-        DecimalFormat format=new DecimalFormat(".00%");
+        DecimalFormat format=new DecimalFormat("0.00%");
         reputation_tv.append(format.format(rep));
 
         viewitemassess.setText(pbView.getPeople()+"人评论");

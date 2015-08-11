@@ -42,5 +42,6 @@
     </string-array>
     <string name="title_activity_capture">CaptureActivity</string>
     <string name="capture_tip">请将二维码置于取景框内扫描</string>
+    <string name="title_activity_web">WebActivity</string>
 
 </resources>

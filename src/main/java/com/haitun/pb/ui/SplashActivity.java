@@ -16,16 +16,17 @@ import com.haitun.pb.R;
 
 public class SplashActivity extends Activity {
     public LocationClient mLocationClient = null;
-    public BDLocationListener mMyLocationListener ;
+    public BDLocationListener mMyLocationListener;
 
-    SharedPreferences sp =null;
+    SharedPreferences sp = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash);
         Fresco.initialize(getApplicationContext());
-        sp= getSharedPreferences("config", MODE_PRIVATE);
+        sp = getSharedPreferences("config", MODE_PRIVATE);
         Handler handler = new Handler();
         handler.postDelayed(new splashHandler(), 2000);
         InitLocation();
@@ -65,6 +66,7 @@ public class SplashActivity extends Activity {
 
             startActivity(intent);
             SplashActivity.this.finish();
+
         }
     }
 
@@ -76,10 +78,10 @@ public class SplashActivity extends Activity {
         @Override
         public void onReceiveLocation(BDLocation location) {
 
-            String address=location.getAddrStr();
-            String province=location.getProvince();
-            String city=location.getCity();
-            String distric=location.getDistrict();//获取区县信息
+            String address = location.getAddrStr();
+            String province = location.getProvince();
+            String city = location.getCity();
+            String distric = location.getDistrict();//获取区县信息
            /* double latitude=location.getLatitude();//获取纬度坐标
             double longitude=location.getLongitude();//获取纬度坐标
 
@@ -87,12 +89,13 @@ public class SplashActivity extends Activity {
             Log.i("+++++",Double.toString(longitude));*/
             SharedPreferences.Editor editor;
             editor = sp.edit();
-            editor.putString("address",address);
-            editor.putString("province",province);
-            editor.putString("city",city);
-            editor.putString("distric",distric);
+            editor.putString("address", address);
+            editor.putString("province", province);
+            editor.putString("city", city);
+            editor.putString("distric", distric);
            /* editor.putString("latitude",Double.toString(latitude));
-            editor.putString("longitude",Double.toString(longitude))*/;
+            editor.putString("longitude",Double.toString(longitude))*/
+
             editor.apply();
         }
 
